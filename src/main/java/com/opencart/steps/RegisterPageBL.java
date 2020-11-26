@@ -1,6 +1,7 @@
 package com.opencart.steps;
 
 import com.opencart.datamodel.RegisterModel;
+import com.opencart.pages.FailRegisterPage;
 import com.opencart.pages.RegisterPage;
 import com.opencart.pages.SuccessRegisterPage;
 import com.opencart.repository.RegisterModelRepository;
@@ -11,6 +12,7 @@ public class RegisterPageBL {
 
     private RegisterPage registerPage;
     private SuccessRegisterPage successRegisterPage;
+    private FailRegisterPage failRegisterPage;
 
     public RegisterPageBL() {
         registerPage = new RegisterPage();
@@ -28,6 +30,36 @@ public class RegisterPageBL {
         clickOnContinueButton();
 
         successRegisterPage = new SuccessRegisterPage();
+        return this;
+    }
+
+    public RegisterPageBL registerNewPersonWithInvalidParameters() {
+        RegisterModel registerModel = RegisterModelRepository.getRegisterModel2();
+        inputFirstName(registerModel.getFirstName());
+        inputLastName(registerModel.getLastName());
+        inputEmail(registerModel.getEmail());
+        inputTelephone(registerModel.getTelephone());
+        inputPassword(registerModel.getPassword());
+        chooseSubscribe(1);
+        clickPolicyCheckbox();
+        clickOnContinueButton();
+
+        successRegisterPage = new SuccessRegisterPage();
+        return this;
+    }
+
+    public RegisterPageBL registerNewPersonWithInvalidParameters2() {
+        RegisterModel registerModel = RegisterModelRepository.getRegisterModel3();
+        inputFirstName(registerModel.getFirstName());
+        inputLastName(registerModel.getLastName());
+        inputEmail(registerModel.getEmail());
+        inputTelephone(registerModel.getTelephone());
+        inputPassword(registerModel.getPassword());
+        chooseSubscribe(1);
+        clickPolicyCheckbox();
+        clickOnContinueButton();
+
+         failRegisterPage = new FailRegisterPage();
         return this;
     }
 
@@ -73,5 +105,10 @@ public class RegisterPageBL {
     public void verifyUserRegistration() {
         String expectedMessage = "Your Account Has Been Created!";
         Assert.assertEquals(successRegisterPage.getSuccessTitle().getText(), expectedMessage, "Incorrect page title");
+    }
+
+    public void verifyUserIsNotRegistration(){
+        String expectedMessage = "First Name must be between 1 and 32 characters!";
+        Assert.assertEquals(failRegisterPage.getInvalidName().getText(), expectedMessage, "Invaid Name!");
     }
 }

@@ -17,4 +17,29 @@ public class UserRegisterTest extends BaseTest {
                 .registerNewPerson();
         registerPageBL.verifyUserRegistration();
     }
+
+    @Test
+    public void registerUserWithInvalidParameters() {
+        new Navigation().navigateToUrl(BASE_URL.getValue());
+        MainPageBL mainPageBL = new MainPageBL();
+        RegisterPageBL registerPageBL = mainPageBL.getHeaderPageBL()
+                .clickOnMyAccountButton()
+                .clickOnRegisterButton()
+                .registerNewPersonWithInvalidParameters();
+        registerPageBL.verifyUserRegistration();
+    }
+
+    @Test
+    public void registerUserWithParametersThatHaveMoreThan32CharsOrLessThan1() {
+        new Navigation().navigateToUrl(BASE_URL.getValue());
+        MainPageBL mainPageBL = new MainPageBL();
+        RegisterPageBL registerPageBL = mainPageBL.getHeaderPageBL()
+                .clickOnMyAccountButton()
+                .clickOnRegisterButton()
+                .registerNewPersonWithInvalidParameters2();
+        registerPageBL.verifyUserIsNotRegistration();
+
+    }
+
+
 }
