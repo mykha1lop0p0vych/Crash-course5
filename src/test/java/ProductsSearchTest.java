@@ -14,7 +14,7 @@ public class ProductsSearchTest extends BaseTest{
     @Test
     public void productsSearch() {
         new Navigation().navigateToUrl(BASE_URL.getValue());
-        new HeaderPage().getInputSearchCriteria().sendKeys("%");
+        new HeaderPage().getInputSearchCriteria().sendKeys("Samsung");
 
         new HeaderPage().getInputSearchGroupButton().click();
         List<ProductContainer> productContainers = new SearchResultPage().getProductContainers();
