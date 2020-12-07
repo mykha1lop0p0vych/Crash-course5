@@ -157,8 +157,10 @@ public class RegisterPageBL {
         inputLastName(registerModel.getLastName());
         inputEmail(registerModel.getEmail());
         inputTelephone(registerModel.getTelephone());
-        inputPassword(registerModel.getPassword());
+        inputPasswordFail(registerModel.getPassword());
+        inputPasswordConfirmFail(registerModel.getPasswordConfirm());
         chooseSubscribe(1);
+        clickPolicyCheckbox();
         clickOnContinueButton();
 
         failRegisterPage = new FailRegisterPage();
@@ -189,6 +191,16 @@ public class RegisterPageBL {
     private void inputPassword(String password) {
         registerPage.getPasswordInput().clear();
         registerPage.getPasswordInput().sendKeys(password);
+        registerPage.getPasswordConfirmInput().clear();
+        registerPage.getPasswordConfirmInput().sendKeys(password);
+    }
+
+    private void inputPasswordFail(String password){
+        registerPage.getPasswordInput().clear();
+        registerPage.getPasswordInput().sendKeys(password);
+    }
+
+    private void inputPasswordConfirmFail(String password){
         registerPage.getPasswordConfirmInput().clear();
         registerPage.getPasswordConfirmInput().sendKeys(password);
     }
@@ -236,13 +248,13 @@ public class RegisterPageBL {
     }
 
     public void verifyUserIsNotRegistrationWithoutPrivatePolicy(){
-        String expectedMessage = " Warning: You must agree to the Privacy Policy!";
-        Assert.assertEquals(failRegisterPage.getInvalidPassword().getText(), expectedMessage, "Private policy  is accepted");
+        String expectedMessage = "Warning: You must agree to the Privacy Policy!";
+        Assert.assertEquals(failRegisterPage.getInvalidRegistrationTitle().getText(), expectedMessage, "Private policy  is accepted");
     }
 
     public void verifyUserIsNotRegistrationWithFailPasswordConfirm(){
         String expectedMessage = "Password confirmation does not match password!";
-        Assert.assertEquals(failRegisterPage.getInvalidPassword().getText(), expectedMessage, "Password is OK");
+        Assert.assertEquals(failRegisterPage.getInvalidConfirmPassword().getText(), expectedMessage, "Password is OK");
     }
 
 

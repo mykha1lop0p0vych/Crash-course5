@@ -111,7 +111,7 @@ public class RegisterModelRepository {
                 .lastName(RandomStringUtils.randomAlphabetic(5))
                 .email(RandomStringUtils.randomAlphabetic(5) + "@gmail.com")
                 .telephone(RandomStringUtils.randomNumeric(10))
-                .password(RandomStringUtils.randomAlphabetic(7))
+                .password(RandomStringUtils.randomAlphabetic(12))
                 .passwordConfirm(RandomStringUtils.randomAlphabetic(9))
                 .build();
     }

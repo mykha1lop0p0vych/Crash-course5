@@ -99,7 +99,7 @@ public class UserRegisterTest extends BaseTest {
         registerPageBL.verifyUserIsNotRegistrationFailPassword();
 
     }
-/*
+
     @Test
     public void registerUserWithUnacceptedPrivatePolicy() {
         new Navigation().navigateToUrl(BASE_URL.getValue());
@@ -122,6 +122,6 @@ public class UserRegisterTest extends BaseTest {
         registerPageBL.verifyUserIsNotRegistrationWithFailPasswordConfirm();
     }
 
- */
+
 
 }
